@@ -4,7 +4,8 @@ import 'package:uuid/uuid.dart';
 import 'package:flutter_shopping_list/main.dart';
 
 class FormMainPage extends StatelessWidget {
-  const FormMainPage();
+  final List _transactions = [];
+
   void _navigateToForm(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(

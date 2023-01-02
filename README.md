@@ -1,4 +1,4 @@
-# flutter_shopping_list
+# lesson_1
 
 A new Flutter project.
 
