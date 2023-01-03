@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shopping_list/transaction.dart';
+import 'package:flutter_transaction_app/transaction.dart';
 import 'package:uuid/uuid.dart';
-import 'package:flutter_shopping_list/main.dart';
+import 'package:flutter_transaction_app/main.dart';
 
 class FormMainPage extends StatelessWidget {
   final List _transactions = [];
