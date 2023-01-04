@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter App',
+      title: 'Transaction App',
       home: MyHomePage(),
     );
   }
@@ -30,7 +30,8 @@ class _MyHomePageState extends State<MyHomePage> {
           id: Uuid().v4(),
           title: titleInput,
           amount: double.parse(amountInput),
-          date: DateTime.now()));
+          date: DateTime.now(),
+          color: math.Random().nextDouble() * 0xFFFFFF));
     });
   }
 
@@ -42,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter App'),
+        title: Text('Transaction App'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -52,26 +53,33 @@ class _MyHomePageState extends State<MyHomePage> {
               width: 200,
               height: 200,
               child: Card(
-                child: PieChart(
-                  PieChartData(
-                    borderData: FlBorderData(show: false),
-                    sectionsSpace: 0,
-                    centerSpaceRadius: 40,
-                    sections: _transactions
-                        .map((e) => PieChartSectionData(
-                              color: Color(
-                                      (math.Random().nextDouble() * 0xFFFFFF)
-                                          .toInt())
-                                  .withOpacity(1.0),
-                              value: e.amount,
-                              title: e.title,
-                              radius: 50,
-                              titleStyle: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ))
-                        .toList(),
-                  ),
-                ),
+                child: _transactions.isEmpty
+                    ? Container(
+                        width: double.infinity,
+                        height: double.infinity,
+                        alignment: Alignment.center,
+                        child: Text('No transactions added yet!'
+                            '\nClick the button below to add one!'),
+                      )
+                    : PieChart(
+                        PieChartData(
+                          borderData: FlBorderData(show: false),
+                          sectionsSpace: 0,
+                          centerSpaceRadius: 40,
+                          sections: _transactions
+                              .map((e) => PieChartSectionData(
+                                    color:
+                                        Color(e.color.toInt()).withOpacity(1.0),
+                                    value: e.amount,
+                                    title: e.title,
+                                    radius: 50,
+                                    titleStyle: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ))
+                              .toList(),
+                        ),
+                      ),
                 elevation: 5,
               ),
             ),
